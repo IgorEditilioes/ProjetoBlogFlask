@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 style="color:orange; text-align:center">Blog criado em Python utilizando Flask framework!</h1>
+    <hr>
+    {% for post in posts %}
+    <div class="row border mt-4 p-2" style="background-color:#f2f5f8">
+        <div class="col col-3">
+            <a href="{{ url_for('exibir_post', post_id=post.id) }}" style="text-decoration:none">
+                <div class="image pe-2"><img
+                        src="{{ url_for('static', filename='fotos_perfil/{}'.format(post.autor.foto_perfil)) }}"
+                        class="rounded" width="200">
+                </div>
+            </a>
+
+            <div class="mt-2"><strong >{{ post.autor.username }}</strong></div>
+            <div class="row justify-content-center">
+                <div>
+                    {% for curso in post.autor.cursos.split(';') %}
+                    <button type="button" class="btn btn-success mt-2" disabled>{{ curso }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col col-9">
+            <div>
+                <a href="{{ url_for('exibir_post', post_id=post.id) }}" style="text-decoration:none"><h5>
+                {{post.titulo}} <small class="text-muted" style="font-size:15px">Data de criação: {{ post.data_criacao.strftime('%d/%m/%Y')  }}</small></h5></a>
+
+            </div>
+            <p>{{ post.corpo }}</p>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+{% endblock %}

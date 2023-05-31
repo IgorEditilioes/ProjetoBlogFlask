@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+    <h1 style="text-align:center">Usuários</h1>
+    <hr>
+    <div class="container">
+        <table class="table mt-4">
+            <thead>
+            <tr>
+                <th>Foto</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Curso</th>
+                <th>N° de Posts</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for usuario in lista_usuarios %}
+            <tr>
+                <td>
+                    <div class="col col-3">
+                        <div class="image pe-2"><img
+                                src="{{ url_for('static', filename='fotos_perfil/{}'.format(usuario.foto_perfil)) }}"
+                                class="rounded" width="200">
+                        </div>
+                    </div>
+                </td>
+                <td>{{usuario.username}}</td>
+                <td>{{usuario.email}}</td>
+                <td>{{usuario.cursos}}</td>
+                <td>{{usuario.contar_post()}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock %}
